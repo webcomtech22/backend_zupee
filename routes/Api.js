@@ -20,7 +20,22 @@ const abtInvestJourneyController = require("../controllers/aboutUsControllers/ab
 const abtOurValuesController = require("../controllers/aboutUsControllers/abt_ourValue.controller")
 const abtInvestorsController = require("../controllers/aboutUsControllers/abt_investors.controller")
 
+const blogInfoController = require("../controllers/blogControllers/blog_blogInfo.contoller")
+const blogAboutController = require("../controllers/blogControllers/blog_about.controller")
+const blogRecentPostsController = require("../controllers/blogControllers/blog_recentPosts.controller")
 
+const newsBannerController = require("../controllers/newsRoom/news_banner.conroller")
+const newsInfoController = require("../controllers/newsRoom/news_newsInfo.controller")
+
+const ludoBannerController = require("../controllers/LudoControllers/ludo_banner.controller")
+const ludoGamesController = require("../controllers/LudoControllers/ludo_games.controller")
+const ludoRatingController = require("../controllers/LudoControllers/ludo_rating.controller")
+const ludoGameToPlayController = require("../controllers/LudoControllers/ludo_gameToPlay.controller")
+const ludoReviewsController = require("../controllers/LudoControllers/ludo_reviews.controller")
+const ludoStepsController = require("../controllers/LudoControllers/ludo_steps.controller")
+const ludoQueAnsController = require("../controllers/LudoControllers/ludo_queans.controller")
+
+const contactUsController = require("../controllers/contact_Us/contact_us.controller")
 
 
 
@@ -130,16 +145,12 @@ function initRoutes(app){
     app.post("/addAbtDreamTeam",upload.single('image'),abtDreamTeamController.abt_saveDreamTeam)
     app.delete("/deleteAbtDreamTeam/:id",abtDreamTeamController.abt_deleteDreamTeam)
 
-
-
     //abt_video
     app.get("/showAbtAllVideo",abtVideoController.findAll)
     app.get("/showOneAbtVideo/:id",abtVideoController.findOne)
     app.post("/editAbtVideo",upload.single('video'),abtVideoController.abt_updateVideo)
-    app.post("/addAbtVideo",upload.single('video'),abtVideoController.abt_saveVideo)
+    app.post("/addAbtVideo",upload.none(),abtVideoController.abt_saveVideo)
     app.delete("/deleteAbtVideo/:id",abtVideoController.abt_deleteVideo)
-
-
 
     //abt_investJourney
     app.get("/showAbtInvestJourney/:id",abtInvestJourneyController.findOne)
@@ -155,6 +166,93 @@ function initRoutes(app){
     //abt_investors
     app.get("/showAbtInvestors/:id",abtInvestorsController.findOne)
     app.post("/editAbtInvestors",upload.single('image'),abtInvestorsController.abt_updateInvestors)
+
+
+
+    //blog Apis
+
+    //blog_info
+    app.get("/showBlogAllInfo",blogInfoController.findAll)
+    app.get("/showBlogSingleInfo/:id",blogInfoController.findOne)
+    app.post("/editBlogInfo",upload.single('image'),blogInfoController.blog_updateBlogInfo)
+    app.post("/addBlogInfo",upload.single('image'),blogInfoController.blog_saveBlogInfo)
+    app.delete("/deleteBlogInfo/:id",blogInfoController.blog_deleteBlogInfo)
+
+    //blog_about
+    app.get("/showBlogAbout/:id",blogAboutController.findOne)
+    app.post("/editBlogAbout",upload.none(),blogAboutController.blog_updateBlogAbout)
+
+    //blog_recentPost
+    app.get("/showBlogAllPosts",blogRecentPostsController.findAll)
+    app.get("/showBlogRecentPost/:id",blogRecentPostsController.findOne)
+    app.delete("/deleteRecentPost/:id",blogRecentPostsController.blog_deleteRecentPost)
+    app.post("/editBlogRecentPost",upload.none(),blogRecentPostsController.blog_updateRecentPost)
+    app.post("/addBlogRecentPost",upload.none(),blogRecentPostsController.blog_saveRecentPost)
+
+
+
+    //newsroom apis
+
+    //newsroom banner
+    app.get("/showNewsBanner/:id",newsBannerController.findOne)
+    app.post("/editNewsBanner",upload.single('image'),newsBannerController.news_updateBanner)
+
+    //newsroom info
+    app.get("/showNewsSingleInfo/:id",newsInfoController.findOne)
+    app.post("/editNewsInfo",upload.single('image'),newsInfoController.news_updateNewsInfo)
+    app.post("/addNewsInfo",upload.single('image'),newsInfoController.news_saveNewsInfo)
+    app.get("/showNewsAllInfo",newsInfoController.findAll)
+    app.delete("/deleteNewsInfo/:id",newsInfoController.news_deleteNewsInfo)
+
+
+    //LUDO apis
+
+    //ludo banner
+    app.get("/showLudoBanner/:id",ludoBannerController.findOne)
+    const cpFields4 = upload.fields([{name:'bigImage',maxCount:1},{name:'smallImage',maxCount:1}])
+    app.post("/editLudoBanner",cpFields4,ludoBannerController.ludo_updateBanner)
+
+    //ludo games
+    app.get("/showLudoAllGames",ludoGamesController.findAll)
+    app.get("/showLudoGames/:id",ludoGamesController.findOne)
+    app.delete("/deleteLudoGames/:id",ludoGamesController.ludo_deleteLudoGames)
+    app.post("/editLudoGames",upload.single('image'),ludoGamesController.ludo_updateLudoGames)
+    app.post("/addLudoGames",upload.single('image'),ludoGamesController.ludo_saveLudoGames)
+
+    //ludo rating
+    app.get("/showLudoRating/:id",ludoRatingController.findOne)
+    app.post("/editLudoRating",upload.single('image'),ludoRatingController.ludo_updateRating)
+
+    //game to play
+    app.get("/showLudoGameToPlay/:id",ludoGameToPlayController.findOne)
+    app.post("/editLudoGameToPlay",upload.single('image'),ludoGameToPlayController.ludo_updateGameToPlay)
+
+    //ludo reviews
+    app.get("/showLudoAllReviews",ludoReviewsController.findAll)
+    app.get("/showLudoReviews/:id",ludoReviewsController.findOne)
+    app.delete("/deleteLudoReviews/:id",ludoReviewsController.ludo_deleteReviews)
+    app.post("/editLudoReviews",upload.single('image'),ludoReviewsController.ludo_updateReviews)
+    app.post("/addLudoReviews",upload.single('image'),ludoReviewsController.ludo_saveReviews)
+
+    //luod steps
+    app.get("/showLudoAllSteps",ludoStepsController.findAll)
+    app.get("/showLudoSteps/:id",ludoStepsController.findOne)
+    app.delete("/deleteLudoSteps/:id",ludoStepsController.ludo_deleteSteps)
+    app.post("/editLudoSteps",upload.single('image'),ludoStepsController.ludo_updateSteps)
+    app.post("/addLudoSteps",upload.single('image'),ludoStepsController.ludo_saveSteps)
+
+    //ludo queAns
+    app.get("/showLudoAllQueAns",ludoQueAnsController.findAll)
+    app.get("/showLudoQueAns/:id",ludoQueAnsController.findOne)
+    app.delete("/deleteLudoQueAns/:id",ludoQueAnsController.ludo_deleteQueAns)
+    app.post("/editLudoQueAns",upload.none(),ludoQueAnsController.ludo_updateQueAns)
+    app.post("/addLudoQueAns",upload.none(),ludoQueAnsController.ludo_saveQueAns)
+
+    //contactUs
+    app.get("/showAllContacts",contactUsController.findAll)
+    app.post("/addContact",upload.none(),contactUsController.saveContacts)
+    app.delete("/deleteContact/:id",contactUsController.deleteContact)
+
 
 }
 

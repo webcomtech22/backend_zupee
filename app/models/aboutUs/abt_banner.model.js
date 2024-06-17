@@ -1,5 +1,4 @@
 const sql = require("../db")
-const DreamTeam = require("./abt_dreamTeam.model")
 
 var Banner = function(abt_banner){
     this.image = abt_banner.image

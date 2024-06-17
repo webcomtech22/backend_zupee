@@ -35,16 +35,19 @@ const abt_updateVideo = async(req,res)=>{
     try{
         id= req.body.id
         let videoData
-        if(req.file){
-            videoData = {
-                video: req.file.filename,
-                }
-        }else
-        {
-            videoData={
-                video: req.body.video,
-            }
+        videoData={
+            video:req.body.video
         }
+        // if(req.file){
+        //     videoData = {
+        //         video: req.file.filename,
+        //         }
+        // }else
+        // {
+        //     videoData={
+        //         video: req.body.video,
+        //     }
+        // }
         const editData = await Video.editVideoData(videoData,id) 
         if(editData){
             res.status(200).json({'status':'success','message':"successfully updated"})
@@ -63,16 +66,19 @@ const abt_saveVideo = async(req,res)=>{
         // name = req.body.filename
         // description = req.body.description
         let videoData
-
-        if(req.file){
-             videoData ={
-                video: req.file.filename,               
-            }
-        }else{
-             videoData =  {
-                video: '',
-            }
+        
+        videoData={
+            video: req.body.video
         }
+        // if(req.file){
+        //      videoData ={
+        //         video: req.file.filename,               
+        //     }
+        // }else{
+        //      videoData =  {
+        //         video: '',
+        //     }
+        // }
         const saveData = await Video.saveVideoData(videoData)
         if(saveData){
             res.status(200).json({message:'video data added'})

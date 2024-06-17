@@ -5,7 +5,7 @@ const findOne = (req,res) =>{
     Banner.findById(id ,(err,row)=>{
         if(err){
             console.log(err)
-        }else{it 
+        }else{
                 if(row){
                 const jsonObject = {
                     id: row.id,

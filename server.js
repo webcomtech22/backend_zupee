@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
     res.setHeader("Access-Control-Allow-Methods",
     "GET, POST, PUT, PATCH, DELETE, OPTIONS");
     next();    
- });
+});
 
 const imagesFolderPath = path.join(__dirname, 'uploads');
 app.use('/uploads',express.static(imagesFolderPath));
